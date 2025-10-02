@@ -84,4 +84,4 @@ $users = arc_db()->table('users')->where('user_status', 0)->get();
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release of ARC Forge. Make sure to run `composer install` after installation.
+Initial release of ARC Forge.

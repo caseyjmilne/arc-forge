@@ -30,6 +30,9 @@ if (file_exists(ARC_FORGE_PATH . 'vendor/autoload.php')) {
     return;
 }
 
+// Load deployment and update management
+require_once ARC_FORGE_PATH . 'deploy/manage.php';
+
 class Plugin
 {
     private static $instance = null;
@@ -51,7 +54,6 @@ class Plugin
     private function init()
     {
         add_action('plugins_loaded', [$this, 'bootEloquent']);
-        add_action('plugins_loaded', [$this, 'loadModels'], 20);
         register_activation_hook(ARC_FORGE_FILE, [$this, 'activate']);
         register_deactivation_hook(ARC_FORGE_FILE, [$this, 'deactivate']);
     }
@@ -84,19 +86,6 @@ class Plugin
         $this->capsule->bootEloquent();
 
         do_action('arc_forge_eloquent_booted', $this->capsule);
-    }
-
-    public function loadModels()
-    {
-        $models_dir = ARC_FORGE_PATH . 'models/';
-        
-        if (is_dir($models_dir)) {
-            foreach (glob($models_dir . '*.php') as $model_file) {
-                require_once $model_file;
-            }
-        }
-
-        do_action('arc_forge_models_loaded');
     }
 
     public function getCapsule()
