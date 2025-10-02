@@ -8,11 +8,10 @@
  * Author URI: https://arcwp.ca
  * Requires PHP: 7.4
  * Requires at least: 5.0
- * Tested up to: 6.7
+ * Tested up to: 6.8
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: arc-forge
- * Domain Path: /languages
  * Namespace: ARC\Forge
  */
 
