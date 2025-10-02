@@ -4,6 +4,7 @@ node_modules/
 .github/
 .gitignore
 .distignore
+.claude
 
 # Build tools
 package.json
