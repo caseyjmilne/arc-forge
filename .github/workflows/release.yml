@@ -3,8 +3,8 @@ name: Build and Release
 on:
   push:
     tags:
-      - 'v*.*.*'  # Triggers on version tags like v1.0.0, v2.1.3, etc.
-      - '*.*.*'   # Also accepts tags without v prefix like 1.0.0
+      - 'v*.*.*'
+      - '*.*.*'
 
 permissions:
   contents: write
@@ -17,7 +17,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Only run if package.json exists (for plugins with npm dependencies)
       - name: Setup Node.js
         if: hashFiles('package.json') != ''
         uses: actions/setup-node@v4
@@ -32,7 +31,6 @@ jobs:
         if: hashFiles('package.json') != ''
         run: npm run build
 
-      # Only run if composer.json exists
       - name: Setup PHP
         if: hashFiles('composer.json') != ''
         uses: shivammathur/setup-php@v2
@@ -43,23 +41,20 @@ jobs:
         if: hashFiles('composer.json') != ''
         run: composer install --no-dev --optimize-autoloader
 
-      - name: Get plugin slug from directory
-        id: slug
-        run: echo "slug=$(basename $GITHUB_WORKSPACE)" >> $GITHUB_OUTPUT
-
-      - name: Create release directory
+      - name: Create clean build directory
         run: |
-          mkdir -p ${{ steps.slug.outputs.slug }}
-          rsync -av --exclude-from='.distignore' ./ ${{ steps.slug.outputs.slug }}/
+          mkdir -p /tmp/arc-forge
+          rsync -av --exclude-from='.distignore' --exclude='.git' ./ /tmp/arc-forge/
 
-      - name: Create zip file
+      - name: Create zip from build directory
         run: |
-          zip -r ${{ steps.slug.outputs.slug }}.zip ${{ steps.slug.outputs.slug }}
+          cd /tmp
+          zip -r $GITHUB_WORKSPACE/arc-forge.zip arc-forge
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{ steps.slug.outputs.slug }}.zip
+          files: arc-forge.zip
           generate_release_notes: true
           draft: false
           prerelease: false
@@ -69,6 +64,6 @@ jobs:
       - name: Upload release artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.slug.outputs.slug }}
-          path: ${{ steps.slug.outputs.slug }}.zip
+          name: arc-forge
+          path: arc-forge.zip
           retention-days: 30
