@@ -58,13 +58,7 @@ class Plugin
 
         // Load helper functions
         require_once ARC_FORGE_PATH . 'includes/helpers.php';
-
-        // Load update checker if available
-        if (file_exists(ARC_FORGE_PATH . 'deploy/manage.php')) {
-            require_once ARC_FORGE_PATH . 'deploy/manage.php';
-        }
         
-        add_action('plugins_loaded', [$this, 'loadTextDomain']);
         add_action('plugins_loaded', [$this, 'bootEloquent']);
         register_activation_hook(ARC_FORGE_FILE, [$this, 'activate']);
         register_deactivation_hook(ARC_FORGE_FILE, [$this, 'deactivate']);
@@ -76,15 +70,6 @@ class Plugin
         echo '<strong>' . esc_html__('ARC Forge Error:', 'arc-forge') . '</strong> ';
         echo esc_html__('Required dependencies are missing. Please reinstall the plugin.', 'arc-forge');
         echo '</p></div>';
-    }
-
-    public function loadTextDomain()
-    {
-        load_plugin_textdomain(
-            'arc-forge',
-            false,
-            dirname(plugin_basename(ARC_FORGE_FILE)) . '/languages'
-        );
     }
 
     public function bootEloquent()
