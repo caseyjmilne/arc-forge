@@ -4,7 +4,10 @@ node_modules/
 .github/
 .gitignore
 .distignore
-.claude
+.claude/
+
+# Deployment folder (will be removed for WordPress.org release branch)
+# deploy/
 
 # Build tools
 package.json
@@ -17,9 +20,9 @@ tailwind.config.js
 postcss.config.js
 tsconfig.json
 
-# Source files (if you compile)
-src/
-assets/src/
+# Source files (if you compile) - ONLY root level src folders
+/src/
+/assets/src/
 
 # Testing
 tests/
