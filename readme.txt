@@ -4,7 +4,7 @@ Tags: eloquent, orm, laravel, database, models, mysql, query-builder
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,12 @@ $users = arc_db()->table('users')->where('user_status', 0)->get();
 For more examples and documentation, visit the plugin's GitHub repository at https://github.com/caseyjmilne/arc-forge
 
 == Changelog ==
+
+= 1.0.2 =
+* Distribution build fixes.
+
+= 1.0.1 =
+* Improves error handling.
 
 = 1.0.0 =
 * Initial release

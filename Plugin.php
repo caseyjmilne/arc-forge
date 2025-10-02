@@ -3,7 +3,7 @@
  * Plugin Name: ARC Forge
  * Plugin URI: https://github.com/caseyjmilne/arc-forge
  * Description: Eloquent ORM integration for WordPress - Part of the ARC Suite
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: ARC Software
  * Author URI: https://arcwp.ca
  * Requires PHP: 7.4
