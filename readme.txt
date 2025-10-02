@@ -1,5 +1,5 @@
 === ARC Forge ===
-Contributors: arcsoftware
+Contributors: arcwp
 Tags: eloquent, orm, laravel, database, models, mysql, query-builder
 Requires at least: 5.0
 Tested up to: 6.7
