@@ -111,7 +111,7 @@ class Plugin
         $this->capsule->addConnection([
             'driver' => 'mysql',
             'host' => $host,
-            'port' => $port,
+            'port' => '10019',
             'database' => DB_NAME,
             'username' => DB_USER,
             'password' => DB_PASSWORD,
